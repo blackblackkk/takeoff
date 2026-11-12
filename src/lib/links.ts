@@ -1,4 +1,4 @@
 export const links = {
-  telegramSupport: "https://t.me/TAKEOFF_NEWS",
-  telegramChannel: "https://t.me/TAKEOFF_NEWS",
+  telegramSupport: "https://t.me/TAKEOFF_SUP",
+  telegramChannel: "https://t.me/takeoff_service",
 } as const;
