@@ -1,0 +1,407 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+h1,
+h2 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+:root {
+  --ink: #1b2b44;
+  --ink-soft: rgb(27 43 68 / 0.72);
+  --line: rgb(27 43 68 / 0.14);
+  --paper: #ffffff;
+  --blush: #fcedef;
+  --blue: #0e74be;
+  --font: "Jost", ui-sans-serif, system-ui, sans-serif;
+  --radius-photo: 1.75rem;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 1.125rem;
+  line-height: 1.6;
+  overflow-x: clip;
+}
+
+h1,
+h2,
+h3,
+p,
+dl,
+dd {
+  margin: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+}
+
+button:not(:disabled),
+[role="button"]:not(:disabled) {
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--blush);
+  color: var(--ink);
+}
+
+/* Layout */
+
+.wrap {
+  width: min(68rem, calc(100% - 2.5rem));
+  margin-inline: auto;
+}
+
+.section {
+  padding-block: 4rem;
+}
+
+@media (min-width: 56rem) {
+  .wrap {
+    width: min(68rem, calc(100% - 5rem));
+  }
+
+  .section {
+    padding-block: 6.5rem;
+  }
+}
+
+/* Type */
+
+.title-xl {
+  font-size: clamp(2.75rem, 7vw, 4.75rem);
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.title-lg {
+  font-size: clamp(1.9rem, 3.6vw, 2.75rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+.text {
+  max-width: 34rem;
+  color: var(--ink-soft);
+  text-wrap: pretty;
+}
+
+.text + .text {
+  margin-top: 1rem;
+}
+
+/* Header */
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 1.1rem;
+}
+
+.site-header > a {
+  text-decoration: none;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.35rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+.logo img {
+  width: 2.25rem;
+  height: 2.25rem;
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  font-size: 1rem;
+}
+
+.site-nav a {
+  text-decoration: none;
+}
+
+.site-nav a:hover {
+  color: var(--blue);
+}
+
+.site-nav .nav-page {
+  display: none;
+}
+
+@media (min-width: 40rem) {
+  .site-nav .nav-page {
+    display: inline;
+  }
+}
+
+/* Buttons */
+
+.btn {
+  display: inline-flex;
+  min-height: 3.25rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  padding: 0.5rem 1.6rem;
+  background: var(--ink);
+  color: var(--paper);
+  font: inherit;
+  font-size: 1.0625rem;
+  font-weight: 500;
+  line-height: 1.2;
+  text-decoration: none;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease;
+}
+
+.btn:hover {
+  border-color: var(--blue);
+  background: var(--blue);
+}
+
+.btn-quiet {
+  border-color: var(--line);
+  background: transparent;
+  color: var(--ink);
+}
+
+.btn-quiet:hover {
+  border-color: var(--ink);
+  background: transparent;
+}
+
+.btn-small {
+  min-height: 2.75rem;
+  padding-inline: 1.2rem;
+  font-size: 1rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+/* Hero */
+
+.hero {
+  display: grid;
+  gap: 2.5rem;
+  padding-block: 2rem 4rem;
+}
+
+.hero .text {
+  margin-top: 1.5rem;
+  font-size: 1.25rem;
+}
+
+.photo {
+  width: 100%;
+  border-radius: var(--radius-photo);
+  object-fit: cover;
+}
+
+.hero .photo {
+  aspect-ratio: 4 / 3;
+  object-position: 42% 50%;
+}
+
+@media (min-width: 56rem) {
+  .hero {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 4rem;
+    padding-block: 3rem 6.5rem;
+  }
+
+  .hero .photo {
+    aspect-ratio: 4 / 5;
+  }
+}
+
+/* About */
+
+.about {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.about .photo {
+  max-width: 24rem;
+  aspect-ratio: 3 / 4;
+}
+
+.about .title-lg {
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 56rem) {
+  .about {
+    grid-template-columns: 24rem 1fr;
+    align-items: center;
+    gap: 5rem;
+  }
+}
+
+/* Why */
+
+.why-list {
+  display: grid;
+  margin-top: 2.5rem;
+}
+
+.why-list div {
+  border-top: 1px solid var(--line);
+  padding-block: 1.4rem;
+}
+
+.why-list dt {
+  font-size: 1.4rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.why-list dd {
+  margin-top: 0.35rem;
+  color: var(--ink-soft);
+}
+
+@media (min-width: 40rem) {
+  .why-list {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 4rem;
+  }
+}
+
+/* Contacts */
+
+.contact {
+  border-radius: var(--radius-photo);
+  padding: 2.5rem 1.5rem;
+  background: var(--blush);
+}
+
+.contact .text {
+  margin-top: 1rem;
+  color: var(--ink);
+}
+
+@media (min-width: 56rem) {
+  .contact {
+    padding: 4.5rem 4rem;
+  }
+}
+
+/* Footer */
+
+.site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 2rem;
+  padding-block: 2.5rem;
+  color: var(--ink-soft);
+  font-size: 1rem;
+}
+
+.link-button {
+  border: 0;
+  padding: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.link-button:hover {
+  color: var(--ink);
+}
+
+/* Policy dialog */
+
+dialog.policy {
+  width: min(34rem, calc(100% - 2rem));
+  margin: auto;
+  border: 0;
+  border-radius: var(--radius-photo);
+  padding: 2rem 1.5rem;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+dialog.policy::backdrop {
+  background: rgb(27 43 68 / 0.5);
+}
+
+dialog.policy h2 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+dialog.policy p {
+  margin-top: 0.9rem;
+  color: var(--ink-soft);
+  font-size: 1rem;
+}
+
+dialog.policy form {
+  margin-top: 1.75rem;
+}
+
+@media (min-width: 40rem) {
+  dialog.policy {
+    padding: 2.5rem;
+  }
+}
