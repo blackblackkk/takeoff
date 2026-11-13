@@ -5,7 +5,8 @@ dist
 screenshots
 artifacts
 .grok
-*.log
+.data
 .env
 .env.*
+*.log
 .DS_Store
