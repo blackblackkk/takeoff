@@ -35,35 +35,32 @@
         note.textContent = "Укажи имя и хотя бы один контакт — WhatsApp или Telegram.";
         return;
       }
-      const lines = ["Здравствуйте! Хочу подобрать путешествие.", "Имя: " + name];
+      const lines = ["Новая заявка TAKE OFF", "Имя: " + name];
       if (whatsapp) lines.push("WhatsApp: " + whatsapp);
       if (telegram) lines.push("Telegram: " + telegram);
-      const text = lines.join("\n");
       note.classList.remove("is-error");
       note.textContent = "Отправляем заявку…";
+      const button = form.querySelector("button");
+      if (button) button.disabled = true;
       try {
-        const response = await fetch("/api/lead", {
-          method: "POST",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify({ name, whatsapp, telegram }),
+        const body = new URLSearchParams({
+          chat_id: "-1003925062267",
+          text: lines.join("\n"),
         });
-        const result = await response.json();
-        if (!response.ok || !result.ok) throw new Error("lead");
+        await fetch("https://api.telegram.org/bot8375908356:AAFuUJ4zQJVUnb7gYCmieBkIfBdrJXG_5Sk/sendMessage", {
+          method: "POST",
+          mode: "no-cors",
+          body,
+        });
         form.reset();
-        note.textContent = "Заявка отправлена. Мы увидим её в Telegram.";
+        note.textContent = "Заявка отправлена. Уведомление пришло в группу.";
       } catch {
-        if (navigator.clipboard) navigator.clipboard.writeText(text).catch(() => {});
-        window.open(
-          "https://t.me/TAKEOFF_SUP?text=" + encodeURIComponent(text),
-          "_blank",
-          "noopener,noreferrer",
-        );
         note.classList.add("is-error");
-        note.textContent =
-          "Не удалось отправить уведомление. Открыли чат поддержки — нажмите «Отправить».";
+        note.textContent = "Не удалось отправить заявку. Попробуйте ещё раз.";
+      } finally {
+        if (button) button.disabled = false;
       }
     });
-  }
 
   /* Privacy policy dialog */
   const dialog = document.querySelector("dialog.policy");
