@@ -61,30 +61,45 @@ async function rememberChatId(chatId: string) {
   await writeFile(CHAT_FILE, chatId, "utf8");
 }
 
-async function telegram(method: string, body?: Record<string, string>) {
+type TelegramChat = { id?: number; type?: string };
+
+type TelegramUpdate = {
+  message?: { chat?: TelegramChat };
+  edited_message?: { chat?: TelegramChat };
+  my_chat_member?: { chat?: TelegramChat };
+  channel_post?: { chat?: TelegramChat };
+};
+
+async function telegram(method: string, body?: Record<string, unknown>) {
   const response = await fetch(`https://api.telegram.org/bot${token()}/${method}`, {
     method: body ? "POST" : "GET",
     headers: body ? { "content-type": "application/json" } : undefined,
     body: body ? JSON.stringify(body) : undefined,
   });
-  return (await response.json()) as {
-    ok: boolean;
-    result?: Array<{ message?: { chat?: { id?: number; type?: string } } }>;
-  };
+  return (await response.json()) as { ok: boolean; result?: TelegramUpdate[] };
+}
+
+function groupChatId(updates: TelegramUpdate[] | undefined) {
+  const chats = (updates ?? []).flatMap((item) =>
+    [item.message?.chat, item.edited_message?.chat, item.my_chat_member?.chat].filter(
+      (chat): chat is TelegramChat => Boolean(chat?.id),
+    ),
+  );
+  const group = [...chats].reverse().find((chat) => chat.type === "group" || chat.type === "supergroup");
+  return group?.id ? String(group.id) : "";
 }
 
 async function resolveChatId() {
   const saved = await readChatId();
-  if (saved) return saved;
-  const updates = await telegram("getUpdates");
-  const chat = updates.result
-    ?.map((item) => item.message?.chat)
-    .reverse()
-    .find((item) => item?.id && item.type === "private");
-  if (!chat?.id) return "";
-  const chatId = String(chat.id);
-  await rememberChatId(chatId);
-  return chatId;
+  const updates = await telegram("getUpdates", {
+    allowed_updates: ["message", "edited_message", "my_chat_member"],
+  });
+  const groupId = groupChatId(updates.result);
+  if (groupId) {
+    if (groupId !== saved) await rememberChatId(groupId);
+    return groupId;
+  }
+  return saved;
 }
 
 export async function sendLead(input: LeadInput): Promise<LeadResult> {
