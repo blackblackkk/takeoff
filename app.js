@@ -61,6 +61,7 @@
         if (button) button.disabled = false;
       }
     });
+  }
 
   /* Privacy policy dialog */
   const dialog = document.querySelector("dialog.policy");
