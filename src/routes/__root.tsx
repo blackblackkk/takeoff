@@ -3,9 +3,9 @@ import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import appCss from "../styles.css?url";
 
-const TITLE = "TAKE OFF — выгодные путешествия";
+const TITLE = "TAKE OFF — сервис путешествий для девушек";
 const DESCRIPTION =
-  "TAKE OFF — международное агентство выгодных путешествий. Более 40 направлений, поддержка 24/7 и проверенные партнёры. Напишите в поддержку в Telegram.";
+  "TAKE OFF помогает девушкам путешествовать выгодно и спокойно: более 40 направлений, проверенные партнёры и поддержка 24/7 в Telegram.";
 
 export const Route = createRootRoute({
   head: () => ({
@@ -14,7 +14,7 @@ export const Route = createRootRoute({
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: TITLE },
       { name: "description", content: DESCRIPTION },
-      { name: "theme-color", content: "#ffffff" },
+      { name: "theme-color", content: "#faf6f1" },
     ],
     links: [
       { rel: "icon", type: "image/png", href: "/favicon.png" },
@@ -22,7 +22,7 @@ export const Route = createRootRoute({
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Jost:wght@400;500&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500&display=swap",
       },
       { rel: "stylesheet", href: appCss },
       { rel: "manifest", href: "/__grok/manifest.webmanifest" },
