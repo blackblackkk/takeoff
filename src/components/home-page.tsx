@@ -118,7 +118,7 @@ const features: readonly { icon: IconName; title: string; text: string }[] = [
   {
     icon: "globe",
     title: "Гибкий подбор маршрутов",
-    text: "Под твой бюджет, даты и настроение",
+    text: "Учитываем твои даты и пожелания",
   },
   {
     icon: "shield",
@@ -284,12 +284,12 @@ export function HomePage() {
           />
           <div className="about-copy" data-reveal style={delay(100)}>
             <h2 className="title">
-              Более <span className="accent">20</span> направлений для твоего идеального отдыха
+              Более <span className="accent">20</span> направлений
             </h2>
             <p className="text">От популярных курортов до экзотических островов.</p>
             <p className="text text-small">
-              take off — сервис путешествий для девушек: подбираем поездку под твой бюджет и
-              даты, помогаем с организацией и остаёмся на связи на каждом этапе.
+              take off — сервис путешествий для девушек: подбираем поездку, помогаем с
+              организацией и остаёмся на связи на каждом этапе.
             </p>
           </div>
         </section>
@@ -349,7 +349,7 @@ export function HomePage() {
             />
             <div className="request-copy">
               <h2 className="title">Готова открыть новые горизонты?</h2>
-              <p className="text">Оставь контакты, и мы подберём лучшее путешествие для тебя</p>
+              <p className="text">Оставь заявку, и мы подберём для тебя лучшее предложение</p>
             </div>
             <RequestForm />
           </div>
