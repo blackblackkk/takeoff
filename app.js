@@ -24,7 +24,7 @@
   const form = document.querySelector(".request-form");
   if (form) {
     const note = form.querySelector(".form-note");
-    form.addEventListener("submit", (event) => {
+    form.addEventListener("submit", async (event) => {
       event.preventDefault();
       const data = new FormData(form);
       const name = String(data.get("name") || "").trim();
@@ -39,16 +39,29 @@
       if (whatsapp) lines.push("WhatsApp: " + whatsapp);
       if (telegram) lines.push("Telegram: " + telegram);
       const text = lines.join("\n");
-
-      if (navigator.clipboard) navigator.clipboard.writeText(text).catch(() => {});
-      window.open(
-        "https://t.me/TAKEOFF_SUP?text=" + encodeURIComponent(text),
-        "_blank",
-        "noopener,noreferrer",
-      );
       note.classList.remove("is-error");
-      note.textContent =
-        "Открыли чат поддержки в Telegram — заявка уже в поле ввода, осталось нажать «Отправить».";
+      note.textContent = "Отправляем заявку…";
+      try {
+        const response = await fetch("/api/lead", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ name, whatsapp, telegram }),
+        });
+        const result = await response.json();
+        if (!response.ok || !result.ok) throw new Error("lead");
+        form.reset();
+        note.textContent = "Заявка отправлена. Мы увидим её в Telegram.";
+      } catch {
+        if (navigator.clipboard) navigator.clipboard.writeText(text).catch(() => {});
+        window.open(
+          "https://t.me/TAKEOFF_SUP?text=" + encodeURIComponent(text),
+          "_blank",
+          "noopener,noreferrer",
+        );
+        note.classList.add("is-error");
+        note.textContent =
+          "Не удалось отправить уведомление. Открыли чат поддержки — нажмите «Отправить».";
+      }
     });
   }
 
