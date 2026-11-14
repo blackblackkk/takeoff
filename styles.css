@@ -122,18 +122,10 @@ button:not(:disabled),
 .btn-small { min-height: 2.75rem; padding-inline: 1.2rem; font-size: 1rem; }
 .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; }
 
-.hero { display: grid; gap: 2.5rem; padding-block: 2rem 4rem; }
+.hero { padding-block: 1.25rem 2rem; }
 .hero .text { margin-top: 1.5rem; font-size: 1.25rem; }
-.photo { width: 100%; border-radius: var(--radius-photo); object-fit: cover; }
-.hero .photo { aspect-ratio: 4 / 3; object-position: 42% 50%; }
 @media (min-width: 56rem) {
-  .hero {
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: 4rem;
-    padding-block: 3rem 6.5rem;
-  }
-  .hero .photo { aspect-ratio: 4 / 5; }
+  .hero { padding-block: 2rem 2.5rem; }
 }
 
 .about { display: grid; gap: 2.5rem; }
