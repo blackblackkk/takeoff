@@ -1,9 +1,9 @@
 import { useId, useRef, useState } from "react";
 import { Logo } from "@/components/logo";
+import { AddToHomeHint } from "@/components/add-to-home-hint";
 import { links } from "@/lib/links";
 
 const reasons = [
-  { title: "40+ направлений", text: "Возможности по всему миру." },
   { title: "Поддержка 24/7", text: "Наша команда всегда на связи." },
   { title: "Проверенные партнёры", text: "Сотрудничаем с надёжными компаниями." },
   { title: "Выгодные условия", text: "Финансовые программы и помощь в организации поездок." },
@@ -36,13 +36,15 @@ export function HomePage() {
         </nav>
       </header>
 
+      <AddToHomeHint />
+
       <main id="top">
         <section className="wrap hero">
           <div>
             <h1 className="title-xl">Путешествуй выгоднее</h1>
             <p className="text">
-              TAKE OFF — международное агентство путешествий. Открываем новые направления и помогаем
-              путешествовать с комфортом по всему миру.
+              TAKE OFF — сервис путешествий для девушек. Подбираем поездку, помогаем с организацией
+              и остаёмся на связи на каждом этапе.
             </p>
             <div className="actions">
               <a className="btn" href={links.telegramSupport} {...external}>
@@ -65,23 +67,13 @@ export function HomePage() {
         </section>
 
         <section id="about" className="wrap section about">
-          <img
-            className="photo"
-            src="/media/woman.jpg"
-            alt="Девушка с чемоданом у окна аэропорта смотрит на самолёт"
-            width={1200}
-            height={1600}
-            loading="lazy"
-            decoding="async"
-          />
           <div>
             <h2 className="title-lg">Открываем мир вместе</h2>
             <p className="text">
               Мы помогаем находить выгодные возможности для путешествий и сотрудничества.
             </p>
             <p className="text">
-              Более 40 направлений, проверенные партнёры, комфортные условия и поддержка нашей
-              команды на каждом этапе.
+              Проверенные партнёры, комфортные условия и поддержка нашей команды на каждом этапе.
             </p>
           </div>
         </section>

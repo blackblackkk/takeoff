@@ -429,3 +429,60 @@ dialog.policy form {
     padding: 2.5rem;
   }
 }
+
+/* Add to Home Screen hint */
+
+.add-to-home {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  width: min(68rem, calc(100% - 2.5rem));
+  margin: 1rem auto 0;
+  padding: 0.9rem 1rem;
+  background: var(--blush);
+  border-radius: 1rem;
+  color: var(--ink);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.add-to-home-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.add-to-home-text strong {
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.add-to-home-text span {
+  color: var(--ink-soft);
+}
+
+.add-to-home-close {
+  flex-shrink: 0;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 0;
+  border-radius: 50%;
+  background: rgb(27 43 68 / 0.08);
+  color: var(--ink);
+  font-size: 1.25rem;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+}
+
+.add-to-home-close:hover {
+  background: rgb(27 43 68 / 0.14);
+}
+
+@media (min-width: 56rem) {
+  .add-to-home {
+    width: min(68rem, calc(100% - 5rem));
+    margin-top: 1.25rem;
+  }
+}
