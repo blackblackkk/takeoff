@@ -55,20 +55,10 @@ export function HomePage() {
               </a>
             </div>
           </div>
-          <img
-            className="photo"
-            src="/media/friends.jpg"
-            alt="Две подруги гуляют по солнечной набережной у моря"
-            width={1400}
-            height={933}
-            fetchPriority="high"
-            decoding="async"
-          />
         </section>
 
         <section id="about" className="wrap section about">
           <div>
-            <h2 className="title-lg">Открываем мир вместе</h2>
             <p className="text">
               Мы помогаем находить выгодные возможности для путешествий и сотрудничества.
             </p>
