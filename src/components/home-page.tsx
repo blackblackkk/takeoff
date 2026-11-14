@@ -33,8 +33,6 @@ export function HomePage() {
         </nav>
       </header>
 
-      <AddToHomeHint />
-
       <main id="top">
         <section className="wrap hero">
           <div>
@@ -168,6 +166,7 @@ export function HomePage() {
           </button>
         </form>
       </dialog>
+      <AddToHomeHint />
     </>
   );
 }
