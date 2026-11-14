@@ -24,9 +24,6 @@ export function HomePage() {
           <Logo />
         </a>
         <nav className="site-nav" aria-label="Разделы">
-          <a className="nav-page" href="#about">
-            О нас
-          </a>
           <a className="nav-page" href="#why">
             Почему мы
           </a>
@@ -54,17 +51,6 @@ export function HomePage() {
                 Telegram-канал
               </a>
             </div>
-          </div>
-        </section>
-
-        <section id="about" className="wrap section about">
-          <div>
-            <p className="text">
-              Мы помогаем находить выгодные возможности для путешествий и сотрудничества.
-            </p>
-            <p className="text">
-              Проверенные партнёры, комфортные условия и поддержка нашей команды на каждом этапе.
-            </p>
           </div>
         </section>
 
