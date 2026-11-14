@@ -1,10 +1,77 @@
 (() => {
-  const hint = document.querySelector(".add-to-home");
-  const close = document.querySelector(".add-to-home-close");
-  if (hint && close) {
-    close.addEventListener("click", () => {
-      hint.remove();
-      try { localStorage.setItem("takeoff-add-to-home-dismissed", "1"); } catch (e) {}
+  const dock = document.querySelector(".home-dock");
+  if (dock) {
+    const captions = {
+      ios: [
+        "Нажмите квадрат со стрелкой вверх — он в центре нижней панели Safari.",
+        "В меню выберите «На экран „Домой“», затем «Добавить» справа сверху.",
+      ],
+      android: [
+        "Нажмите три точки в правом верхнем углу Chrome.",
+        "Выберите «Добавить на главный экран» или «Установить приложение».",
+      ],
+    };
+    const text = dock.querySelector(".caption-text");
+    const arrow = dock.querySelector(".point-down");
+    let platform = "ios";
+    let step = 0;
+    let timer = 0;
+
+    const paint = () => {
+      dock.querySelectorAll(".home-dock-switch button").forEach((button) => {
+        const on = button.getAttribute("data-platform") === platform;
+        button.classList.toggle("is-on", on);
+        button.setAttribute("aria-selected", on ? "true" : "false");
+      });
+      dock.querySelectorAll(".dock-steps").forEach((list) => {
+        const on = list.getAttribute("data-steps") === platform;
+        list.classList.toggle("is-active", on);
+        if (!on) return;
+        list.querySelectorAll(".step-card").forEach((card) => {
+          card.classList.toggle("is-hot", Number(card.getAttribute("data-step")) === step);
+        });
+      });
+      text.textContent = captions[platform][step];
+      arrow.classList.toggle("is-hidden", !(platform === "ios" && step === 0));
+    };
+
+    const play = () => {
+      window.clearInterval(timer);
+      timer = window.setInterval(() => {
+        step = step === 0 ? 1 : 0;
+        paint();
+      }, 2800);
+    };
+
+    const ios =
+      /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    platform = /Android/i.test(navigator.userAgent) && !ios ? "android" : "ios";
+    paint();
+    play();
+
+    dock.querySelectorAll(".home-dock-switch button").forEach((button) => {
+      button.addEventListener("click", () => {
+        platform = button.getAttribute("data-platform");
+        step = 0;
+        paint();
+        play();
+      });
+    });
+    dock.querySelectorAll(".step-card").forEach((card) => {
+      card.addEventListener("click", () => {
+        step = Number(card.getAttribute("data-step"));
+        paint();
+        play();
+      });
+    });
+    dock.querySelector(".home-dock-close").addEventListener("click", () => {
+      window.clearInterval(timer);
+      dock.remove();
+      document.documentElement.classList.add("dock-off");
+      try {
+        localStorage.setItem("takeoff-home-dock-dismissed", "1");
+      } catch (e) {}
     });
   }
 

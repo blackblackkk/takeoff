@@ -203,37 +203,201 @@ dialog.policy form { margin-top: 1.75rem; }
   dialog.policy { padding: 2.5rem; }
 }
 
-.add-to-home {
+html:not(.dock-off) body {
+  padding-bottom: calc(17.5rem + env(safe-area-inset-bottom));
+}
+
+html.dock-off .home-dock {
+  display: none;
+}
+
+.home-dock {
+  position: fixed;
+  z-index: 40;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0.35rem 0.7rem calc(0.65rem + env(safe-area-inset-bottom));
+  pointer-events: none;
+}
+
+.home-dock-card {
+  pointer-events: auto;
+  width: min(26rem, 100%);
+  margin-inline: auto;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 1.4rem;
+  box-shadow: 0 18px 44px rgb(27 43 68 / 0.18);
+  padding: 0.85rem 0.8rem 0.75rem;
+  animation: dock-in 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.dock-head {
   display: flex;
   align-items: flex-start;
-  gap: 0.75rem;
-  width: min(68rem, calc(100% - 2.5rem));
-  margin: 1rem auto 0;
-  padding: 0.9rem 1rem;
-  background: var(--blush);
-  border-radius: 1rem;
-  color: var(--ink);
-  font-size: 0.95rem;
-  line-height: 1.4;
+  gap: 0.6rem;
 }
-.add-to-home-text { flex: 1; display: flex; flex-direction: column; gap: 0.2rem; }
-.add-to-home-text strong { font-weight: 500; font-size: 1rem; }
-.add-to-home-text span { color: var(--ink-soft); }
-.add-to-home-close {
+
+.dock-head p {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.dock-head strong {
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.dock-head span {
+  color: var(--ink-soft);
+  font-size: 0.84rem;
+  line-height: 1.3;
+}
+
+.home-dock-close {
   flex-shrink: 0;
-  width: 1.75rem;
-  height: 1.75rem;
+  width: 2.25rem;
+  height: 2.25rem;
   border: 0;
   border-radius: 50%;
-  background: rgb(27 43 68 / 0.08);
+  background: rgb(27 43 68 / 0.06);
   color: var(--ink);
-  font-size: 1.25rem;
+  font-size: 1.35rem;
   line-height: 1;
+}
+
+.home-dock-switch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.3rem;
+  padding: 0.2rem;
+  margin: 0.7rem 0 0.65rem;
+  background: var(--blush);
+  border-radius: 999px;
+}
+
+.home-dock-switch button {
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink-soft);
+  font: inherit;
+  font-size: 0.95rem;
+  min-height: 2.3rem;
+}
+
+.home-dock-switch button.is-on {
+  background: #fff;
+  color: var(--ink);
+  box-shadow: 0 1px 4px rgb(27 43 68 / 0.08);
+}
+
+.dock-steps {
+  display: none;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.dock-steps.is-active {
+  display: grid;
+}
+
+.step-card {
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: #fff;
+  color: inherit;
+  font: inherit;
+  text-align: center;
+  padding: 0.7rem 0.4rem 0.6rem;
+  min-height: 7.4rem;
+}
+
+.step-card b,
+.step-card small {
+  display: block;
+}
+
+.step-card b {
+  margin-top: 0.45rem;
+  font-size: 0.92rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.step-card small {
+  margin-top: 0.2rem;
+  color: var(--ink-soft);
+  font-size: 0.75rem;
+  line-height: 1.25;
+}
+
+.step-ico {
+  width: 2.6rem;
+  height: 2.6rem;
+  margin-inline: auto;
   display: grid;
   place-items: center;
+  border-radius: 0.8rem;
+  background: var(--blush);
+  color: var(--ink);
 }
-.add-to-home-close:hover { background: rgb(27 43 68 / 0.14); }
-@media (min-width: 56rem) {
-  .add-to-home { width: min(68rem, calc(100% - 5rem)); margin-top: 1.25rem; }
+
+.step-card.is-hot {
+  border-color: var(--ink);
+  background: #f7f9fb;
+  box-shadow: 0 0 0 2px var(--ink);
 }
-html.hint-off .add-to-home { display: none; }
+
+.step-card.is-hot .step-ico {
+  background: var(--ink);
+  color: #fff;
+  animation: hop 1.15s ease-in-out infinite;
+}
+
+.dock-caption {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+  margin: 0.7rem 0.15rem 0.1rem;
+  color: var(--ink);
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+.point-down {
+  flex-shrink: 0;
+  width: 1.4rem;
+  text-align: center;
+  font-size: 1.15rem;
+  line-height: 1.2;
+  animation: hop 1.15s ease-in-out infinite;
+}
+
+.point-down.is-hidden {
+  display: none;
+}
+
+@keyframes dock-in {
+  from { transform: translateY(120%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes hop {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-dock-card,
+  .step-card.is-hot .step-ico,
+  .point-down {
+    animation: none;
+  }
+}

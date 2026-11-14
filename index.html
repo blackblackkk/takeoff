@@ -20,8 +20,10 @@
     <link rel="stylesheet" href="styles.css" />
     <script>
       try {
-        if (localStorage.getItem("takeoff-add-to-home-dismissed") === "1") {
-          document.documentElement.classList.add("hint-off");
+        var standalone =
+          window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone;
+        if (standalone || localStorage.getItem("takeoff-home-dock-dismissed") === "1") {
+          document.documentElement.classList.add("dock-off");
         }
       } catch (e) {}
     </script>
@@ -39,14 +41,6 @@
         <a class="btn btn-quiet btn-small" href="https://t.me/TAKEOFF_SUP" target="_blank" rel="noopener noreferrer">Написать нам</a>
       </nav>
     </header>
-
-    <div class="add-to-home" role="status">
-      <div class="add-to-home-text">
-        <strong>Не потеряйте сайт</strong>
-        <span>Добавьте TAKE OFF на главный экран: нажмите «Поделиться» → «На экран «Домой»»</span>
-      </div>
-      <button type="button" class="add-to-home-close" aria-label="Скрыть подсказку">×</button>
-    </div>
 
     <main id="top">
       <section class="wrap hero">
@@ -115,6 +109,70 @@
         <button type="submit" class="btn">Закрыть</button>
       </form>
     </dialog>
+
+    <div class="home-dock" id="home-dock">
+      <div class="home-dock-card">
+        <div class="dock-head">
+          <p>
+            <strong>Добавьте на главный экран</strong>
+            <span>Сайт откроется как приложение, без адресной строки</span>
+          </p>
+          <button type="button" class="home-dock-close" aria-label="Скрыть подсказку">×</button>
+        </div>
+        <div class="home-dock-switch" role="tablist" aria-label="Ваш телефон">
+          <button type="button" data-platform="ios" class="is-on" role="tab">iPhone</button>
+          <button type="button" data-platform="android" role="tab">Android</button>
+        </div>
+        <div class="dock-steps is-active" data-steps="ios">
+          <button type="button" class="step-card is-hot" data-step="0">
+            <span class="step-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22">
+                <path d="M12 15.5V4.5M8.2 8 12 4.2 15.8 8M7 13.2V18a1.6 1.6 0 0 0 1.6 1.6h6.8A1.6 1.6 0 0 0 17 18v-4.8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </span>
+            <b>1. Поделиться</b>
+            <small>кнопка внизу Safari</small>
+          </button>
+          <button type="button" class="step-card" data-step="1">
+            <span class="step-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22">
+                <rect x="5" y="3.5" width="14" height="17" rx="2.4" fill="none" stroke="currentColor" stroke-width="1.8"></rect>
+                <path d="M12 8.2v6.2M9 11.3h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+              </svg>
+            </span>
+            <b>2. На экран «Домой»</b>
+            <small>потом «Добавить»</small>
+          </button>
+        </div>
+        <div class="dock-steps" data-steps="android">
+          <button type="button" class="step-card is-hot" data-step="0">
+            <span class="step-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22">
+                <circle cx="12" cy="6" r="1.4" fill="currentColor"></circle>
+                <circle cx="12" cy="12" r="1.4" fill="currentColor"></circle>
+                <circle cx="12" cy="18" r="1.4" fill="currentColor"></circle>
+              </svg>
+            </span>
+            <b>1. Три точки</b>
+            <small>справа вверху</small>
+          </button>
+          <button type="button" class="step-card" data-step="1">
+            <span class="step-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22">
+                <rect x="5" y="3.5" width="14" height="17" rx="2.4" fill="none" stroke="currentColor" stroke-width="1.8"></rect>
+                <path d="M12 8.2v6.2M9 11.3h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+              </svg>
+            </span>
+            <b>2. На главный экран</b>
+            <small>или «Установить»</small>
+          </button>
+        </div>
+        <p class="dock-caption" role="status">
+          <span class="point-down" aria-hidden="true">↓</span>
+          <span class="caption-text">Нажмите квадрат со стрелкой вверх — он в центре нижней панели Safari.</span>
+        </p>
+      </div>
+    </div>
     <script src="app.js" defer></script>
   </body>
 </html>
