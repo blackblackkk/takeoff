@@ -204,7 +204,7 @@ dialog.policy form { margin-top: 1.75rem; }
 }
 
 html:not(.dock-off) body {
-  padding-bottom: calc(17.5rem + env(safe-area-inset-bottom));
+  padding-bottom: calc(12.25rem + env(safe-area-inset-bottom));
 }
 
 html.dock-off .home-dock {
@@ -217,7 +217,7 @@ html.dock-off .home-dock {
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 0.35rem 0.7rem calc(0.65rem + env(safe-area-inset-bottom));
+  padding: 0.2rem 0.55rem calc(0.4rem + env(safe-area-inset-bottom));
   pointer-events: none;
 }
 
@@ -228,9 +228,9 @@ html.dock-off .home-dock {
   background: #fff;
   color: var(--ink);
   border: 1px solid var(--line);
-  border-radius: 1.4rem;
-  box-shadow: 0 18px 44px rgb(27 43 68 / 0.18);
-  padding: 0.85rem 0.8rem 0.75rem;
+  border-radius: 1.1rem;
+  box-shadow: 0 12px 28px rgb(27 43 68 / 0.16);
+  padding: 0.5rem 0.55rem 0.45rem;
   animation: dock-in 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
@@ -249,35 +249,33 @@ html.dock-off .home-dock {
 }
 
 .dock-head strong {
-  font-size: 1.05rem;
+  font-size: 0.92rem;
   font-weight: 500;
   line-height: 1.2;
 }
 
 .dock-head span {
-  color: var(--ink-soft);
-  font-size: 0.84rem;
-  line-height: 1.3;
+  display: none;
 }
 
 .home-dock-close {
   flex-shrink: 0;
-  width: 2.25rem;
-  height: 2.25rem;
+  width: 1.65rem;
+  height: 1.65rem;
   border: 0;
   border-radius: 50%;
   background: rgb(27 43 68 / 0.06);
   color: var(--ink);
-  font-size: 1.35rem;
+  font-size: 1.1rem;
   line-height: 1;
 }
 
 .home-dock-switch {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.3rem;
-  padding: 0.2rem;
-  margin: 0.7rem 0 0.65rem;
+  gap: 0.2rem;
+  padding: 0.15rem;
+  margin: 0.4rem 0 0.4rem;
   background: var(--blush);
   border-radius: 999px;
 }
@@ -288,8 +286,8 @@ html.dock-off .home-dock {
   background: transparent;
   color: var(--ink-soft);
   font: inherit;
-  font-size: 0.95rem;
-  min-height: 2.3rem;
+  font-size: 0.78rem;
+  min-height: 1.65rem;
 }
 
 .home-dock-switch button.is-on {
@@ -301,7 +299,7 @@ html.dock-off .home-dock {
 .dock-steps {
   display: none;
   grid-template-columns: 1fr 1fr;
-  gap: 0.5rem;
+  gap: 0.35rem;
 }
 
 .dock-steps.is-active {
@@ -310,13 +308,13 @@ html.dock-off .home-dock {
 
 .step-card {
   border: 1px solid var(--line);
-  border-radius: 1rem;
+  border-radius: 0.75rem;
   background: #fff;
   color: inherit;
   font: inherit;
   text-align: center;
-  padding: 0.7rem 0.4rem 0.6rem;
-  min-height: 7.4rem;
+  padding: 0.4rem 0.3rem 0.35rem;
+  min-height: 0;
 }
 
 .step-card b,
@@ -325,28 +323,33 @@ html.dock-off .home-dock {
 }
 
 .step-card b {
-  margin-top: 0.45rem;
-  font-size: 0.92rem;
+  margin-top: 0.25rem;
+  font-size: 0.78rem;
   font-weight: 500;
-  line-height: 1.2;
+  line-height: 1.15;
 }
 
 .step-card small {
-  margin-top: 0.2rem;
+  margin-top: 0.1rem;
   color: var(--ink-soft);
-  font-size: 0.75rem;
-  line-height: 1.25;
+  font-size: 0.68rem;
+  line-height: 1.2;
 }
 
 .step-ico {
-  width: 2.6rem;
-  height: 2.6rem;
+  width: 1.7rem;
+  height: 1.7rem;
   margin-inline: auto;
   display: grid;
   place-items: center;
-  border-radius: 0.8rem;
+  border-radius: 0.5rem;
   background: var(--blush);
   color: var(--ink);
+}
+
+.step-ico svg {
+  width: 15px;
+  height: 15px;
 }
 
 .step-card.is-hot {
@@ -364,19 +367,19 @@ html.dock-off .home-dock {
 .dock-caption {
   display: flex;
   align-items: flex-start;
-  gap: 0.45rem;
-  margin: 0.7rem 0.15rem 0.1rem;
-  color: var(--ink);
-  font-size: 0.9rem;
-  line-height: 1.35;
+  gap: 0.3rem;
+  margin: 0.4rem 0.1rem 0;
+  color: var(--ink-soft);
+  font-size: 0.75rem;
+  line-height: 1.3;
 }
 
 .point-down {
   flex-shrink: 0;
-  width: 1.4rem;
+  width: 0.9rem;
   text-align: center;
-  font-size: 1.15rem;
-  line-height: 1.2;
+  font-size: 0.9rem;
+  line-height: 1.25;
   animation: hop 1.15s ease-in-out infinite;
 }
 
